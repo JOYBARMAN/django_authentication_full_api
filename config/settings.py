@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -138,6 +138,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'account_api.User'
 
+# Email configuration 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+
 # jwt setting
 
 SIMPLE_JWT = {
@@ -156,6 +164,8 @@ SIMPLE_JWT = {
 
     'JTI_CLAIM': 'jti',
 }
+
+PASSWORD_RESET_TIMEOUT =900
 
 # cros alow origin
 CORS_ALLOWED_ORIGINS = [
